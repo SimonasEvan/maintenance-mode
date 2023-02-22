@@ -3,7 +3,7 @@
 Plugin Name: Maintenance Mode
 Plugin URI: https://github.com/SimonasEvan/maintenance-mode
 Description: Display a maintenance page for all visitors except admins.
-Version: 1.0
+Version: 1.0.1
 Author: ProgPros
 Author URI: https://progpros.com
 */
@@ -27,7 +27,7 @@ function add_maintenance_mode_settings() {
 add_action( 'admin_menu', 'add_maintenance_mode_settings' );
 
 // Settings Page
-function add_maintenance_mode_settings_page() {
+function maintenance_mode_settings_page() {
     if (!current_user_can( 'manage_options' )) {
         wp_die( 'You do not have sufficient permissions to access this page.', 'maintenance-mode' );
     }
@@ -38,6 +38,7 @@ function add_maintenance_mode_settings_page() {
             update_option( 'maintenance_mode', 'enabled' );
         } else {
             update_option( 'maintenance-mode', 'disabled' );
+            update_option( 'maintenance_mode', 'disabled' );
         }
         // Display success message
         echo '<div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>';
